@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M-Motors - Catalog</title>
+  </head>
+  <body>
+    <h1>M-Motors Catalog</h1>
+    <p>{{ vehicles|length }} vehicles found</p>
+
+    {% for vehicle in vehicles %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0">
+      <h2>{{ vehicle.brand }} {{ vehicle.model }}</h2>
+      <p>Year: {{ vehicle.year }} - {{ vehicle.mileage }} km</p>
+      <p><strong>{{ vehicle.sale_price }} €</strong></p>
+    </div>
+    {% empty %}
+    <p>No vehicles matching your criteria found.</p>
+    {% endfor %}
+  </body>
+</html>
