@@ -123,3 +123,6 @@ AUTH_USER_MODEL = "accounts.User"
 
 # On indique à Django où rediriger quand le décorateur @login_required bloque l'accès
 LOGIN_URL = "accounts:signin"
+
+# Permet d'afficher l'email de réinitialisation de mot de passe dans le terminal
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
