@@ -10,6 +10,32 @@
     />
   </head>
   <body>
+    <nav class="navbar navbar-dark bg-dark mb-0">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'vehicles:vehicle_list' %}"
+          >M-Motors</a
+        >
+        <div>
+          {% if user.is_authenticated %}
+          <span class="text-light me-3">{{ user.first_name }}</span>
+          <a
+            href="{% url 'accounts:logout' %}"
+            class="btn btn-outline-light btn-sm"
+            >Log Out</a
+          >
+          {% else %}
+          <a
+            href="{% url 'accounts:signin' %}"
+            class="btn btn-outline-light btn-sm me-2"
+            >Sign In</a
+          >
+          <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm"
+            >Sign Up</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </nav>
     <div class="container my-4">
       <h1 class="mb-4">M-Motors Catalog</h1>
 
