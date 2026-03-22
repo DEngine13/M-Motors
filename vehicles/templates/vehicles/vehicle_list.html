@@ -17,7 +17,11 @@
         >
         <div>
           {% if user.is_authenticated %}
-          <span class="text-light me-3">{{ user.first_name }}</span>
+          <a
+            href="{% url 'accounts:profile' %}"
+            class="text-light text-decoration-none me-3"
+            >{{ user.first_name }}</a
+          >
           <a
             href="{% url 'accounts:logout' %}"
             class="btn btn-outline-light btn-sm"

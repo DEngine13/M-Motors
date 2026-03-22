@@ -120,3 +120,6 @@ STATIC_URL = 'static/'
 
 # On dit à Django d'utiliser notre classe User, qui hérite d'AbastractUser
 AUTH_USER_MODEL = "accounts.User"
+
+# On indique à Django où rediriger quand le décorateur @login_required bloque l'accès
+LOGIN_URL = "accounts:signin"
