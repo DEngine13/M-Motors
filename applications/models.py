@@ -21,6 +21,13 @@ class Application(models.Model):
         (REJECTED, "Rejected"),
     ]
 
+    DURATION_CHOICES = [
+        (12, "12 months"),
+        (24, "24 months"),
+        (36, "36 months"),
+        (48, "48 months"),
+    ]
+
     applicant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -34,6 +41,12 @@ class Application(models.Model):
     )
 
     application_type = models.CharField("Type", max_length=10, choices=TYPE_CHOICES)
+    rental_duration = models.IntegerField(
+        "Rental duration (months)",
+        choices=DURATION_CHOICES,
+        null=True,
+        blank=True,
+    )
     status = models.CharField("Status", max_length=20, choices=STATUS_CHOICES, default=PENDING)
     rejection_reason = models.TextField("Reason for refusal", blank=True)
     created_at = models.DateTimeField("Submission date", auto_now_add=True)
