@@ -127,3 +127,10 @@ LOGIN_URL = "accounts:signin"
 
 # Permet d'afficher l'email de réinitialisation de mot de passe dans le terminal
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Permet de gérer les fichiers uploadés
+# URL pour accéder aux fichiers
+MEDIA_URL = "/media/" 
+
+# Dossier où seront stockés les fichiers
+MEDIA_ROOT = BASE_DIR / "media"

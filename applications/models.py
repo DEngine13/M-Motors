@@ -54,4 +54,31 @@ class Application(models.Model):
     def __str__(self):
         return f"File #{self.pk} — {self.get_application_type_display()} — {self.vehicle}"
 
+class Document(models.Model):
+    ID_CARD = "id_card"
+    PROOF_OF_ADDRESS = "proof_of_address"
+    PAYSLIP_1 = "payslip_1"
+    PAYSLIP_2 = "payslip_2"
+    PAYSLIP_3 = "payslip_3"
+    BANK_DETAILS = "bank_details"
+    TYPE_CHOICES = [
+        (ID_CARD, "Identification card"),
+        (PROOF_OF_ADDRESS, "proof of address"),
+        (PAYSLIP_1, "payslip (month 1)"),
+        (PAYSLIP_2, "payslip (month 2)"),
+        (PAYSLIP_3, "payslip (month 3)"),
+        (BANK_DETAILS, "RIB"),
+    ]
 
+    application = models.ForeignKey(
+        Application,
+        on_delete=models.CASCADE,
+        related_name="files",
+    )
+
+    document_type = models.CharField("Type", max_length=30, choices=TYPE_CHOICES)
+    file = models.FileField("File", upload_to="files/")
+    uploaded_at = models.DateTimeField("Upload date", auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.get_document_type_display()} — Application #{self.application_id}"
