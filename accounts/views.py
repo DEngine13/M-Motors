@@ -43,3 +43,8 @@ def profile(request):
         user.save()
         return redirect("accounts:profile")
     return render(request, "accounts/profile.html")
+
+@login_required
+def dashboard(request):
+    applications = request.user.applications.all().order_by("-created_at")
+    return render(request, "accounts/dashboard.html", {"applications": applications})
