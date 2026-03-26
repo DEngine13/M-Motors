@@ -82,3 +82,12 @@ def upload_documents(request, pk):
         "docs_uploaded": len(existing_docs),
         "docs_total": len(Document.TYPE_CHOICES),
     })
+
+@login_required
+def application_detail(request, pk):
+    application = get_object_or_404(Application, pk=pk, applicant=request.user)
+    documents = application.files.all()
+    return render(request, "applications/application_detail.html", {
+        "application": application,
+        "documents": documents,
+    })
