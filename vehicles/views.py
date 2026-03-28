@@ -5,10 +5,10 @@ from .models import Vehicle
 
 # On renvoie la liste de tous les véhicules
 def vehicle_list(request):
-    vehicles = Vehicle.objects.all()
+    vehicles = Vehicle.objects.filter(is_active=True)
     return render(request, "vehicles/vehicle_list.html", {"vehicles": vehicles})
 
 # On récupère un véhicule par sa primary key (pk), sinon on renvoie une page 404
 def vehicle_detail(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
+    vehicle = get_object_or_404(Vehicle, pk=pk, is_active=True)
     return render(request, "vehicles/vehicle_details.html", {"vehicle": vehicle})
