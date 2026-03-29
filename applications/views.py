@@ -28,23 +28,25 @@ def apply_rental(request, vehicle_pk):
 
     if request.method == "POST":
         duration = request.POST.get("rental_duration")
-        Application.objects.create(
-            applicant=request.user,
-            vehicle=vehicle,
-            application_type=Application.RENTAL,
-            rental_duration=duration,
-        )
         application = Application.objects.create(
             applicant=request.user,
             vehicle=vehicle,
             application_type=Application.RENTAL,
             rental_duration=duration,
         )
+        # On sauvegarde les options sélectionnées
+        option_ids = request.POST.getlist("rental_options")
+        if option_ids:
+            application.rental_options.set(option_ids)
         return redirect("applications:upload_documents", pk=application.pk)
-    
+
+    from vehicles.models import RentalOption
+    options = RentalOption.objects.filter(is_active=True)
+
     return render(request, "applications/apply_rental.html", {
         "vehicle": vehicle,
         "duration_choices": Application.DURATION_CHOICES,
+        "options": options,
     })
 
 @login_required

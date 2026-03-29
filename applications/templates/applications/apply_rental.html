@@ -68,6 +68,31 @@
           </div>
         </div>
 
+        {% if options %}
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">Options</div>
+          <div class="card-body">
+            {% for option in options %}
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="rental_options"
+                value="{{ option.pk }}"
+                id="option_{{ option.pk }}"
+              />
+              <label class="form-check-label" for="option_{{ option.pk }}">
+                <strong>{{ option.name }}</strong> — {{ option.description }}
+                <span class="badge bg-light text-dark ms-1"
+                  >+{{ option.monthly_price }} €/month</span
+                >
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
         <div class="card border-success mb-4">
           <div class="card-header bg-success text-white">Summary</div>
           <div class="card-body">

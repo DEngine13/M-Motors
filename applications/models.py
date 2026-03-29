@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from vehicles.models import Vehicle
+from vehicles.models import Vehicle, RentalOption
 
 class Application(models.Model):
     PURCHASE = "purchase"
@@ -46,6 +46,11 @@ class Application(models.Model):
         choices=DURATION_CHOICES,
         null=True,
         blank=True,
+    )
+    rental_options = models.ManyToManyField(
+        RentalOption,
+        blank=True,
+        related_name="applications",
     )
     status = models.CharField("Status", max_length=20, choices=STATUS_CHOICES, default=PENDING)
     rejection_reason = models.TextField("Reason for refusal", blank=True)

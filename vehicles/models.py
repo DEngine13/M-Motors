@@ -32,4 +32,11 @@ class Vehicle(models.Model):
     def is_for_rental(self):
         return self.vehicle_type in (self.RENTAL, self.BOTH)
     
-    
+class RentalOption(models.Model):
+    name = models.CharField("Name", max_length=100)
+    description = models.TextField("Description")
+    monthly_price = models.DecimalField("Monthly price (€)", max_digits=8, decimal_places=2)
+    is_active = models.BooleanField("Active", default=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.monthly_price} €/month)"

@@ -7,4 +7,5 @@ app_name = "vehicles"
 urlpatterns = [
     path("", views.vehicle_list, name="vehicle_list"),
     path("vehicule/<int:pk>", views.vehicle_detail, name="vehicle_detail"),
+    path("rental-options/", views.rental_options_page, name="rental_options"),
 ]
