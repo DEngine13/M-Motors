@@ -19,6 +19,7 @@ class Vehicle(models.Model):
     monthly_rental = models.DecimalField("Monthly fee (€/month)", max_digits=8, decimal_places=2, null=True, blank=True)
     vehicle_type = models.CharField("Offer type", max_length=10, choices=TYPE_CHOICES, default=BOTH)
     description = models.TextField("Description", blank=True)
+    photo = models.ImageField("Photo", upload_to="vehicles/", blank=True, null=True)
     is_active = models.BooleanField("Active", default=True)
 
     def __str__(self):

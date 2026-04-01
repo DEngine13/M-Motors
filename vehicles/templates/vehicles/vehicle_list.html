@@ -16,6 +16,11 @@
           >M-Motors</a
         >
         <div>
+          <a
+            href="{% url 'vehicles:rental_options' %}"
+            class="btn btn-outline-light btn-sm me-2"
+            >Rental Options</a
+          >
           {% if user.is_authenticated %}
           <a
             href="{% url 'accounts:dashboard' %}"
@@ -30,16 +35,16 @@
           <a
             href="{% url 'accounts:logout' %}"
             class="btn btn-outline-light btn-sm"
-            >Log Out</a
+            >Logout</a
           >
           {% else %}
           <a
             href="{% url 'accounts:signin' %}"
             class="btn btn-outline-light btn-sm me-2"
-            >Sign In</a
+            >Sign in</a
           >
           <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-sm"
-            >Sign Up</a
+            >Sign up</a
           >
           {% endif %}
         </div>
@@ -69,12 +74,50 @@
           </select>
         </div>
         <div class="col-auto">
+          <select name="type" class="form-select">
+            <option value="">All types</option>
+            <option
+              value="sale"
+              {%
+              if
+              current_type=""
+              ="sale"
+              %}selected{%
+              endif
+              %}
+            >
+              Sale
+            </option>
+            <option
+              value="rental"
+              {%
+              if
+              current_type=""
+              ="rental"
+              %}selected{%
+              endif
+              %}
+            >
+              Rental
+            </option>
+          </select>
+        </div>
+        <div class="col-auto">
           <input
             type="number"
             name="price_max"
             class="form-control"
-            placeholder="Maximum price (€)"
+            placeholder="Max price (€)"
             value="{{ current_price_max }}"
+          />
+        </div>
+        <div class="col-auto">
+          <input
+            type="number"
+            name="km_max"
+            class="form-control"
+            placeholder="Max mileage (km)"
+            value="{{ current_km_max }}"
           />
         </div>
         <div class="col-auto">
@@ -82,7 +125,7 @@
           <a
             href="{% url 'vehicles:vehicle_list' %}"
             class="btn btn-outline-secondary"
-            >Reset filters</a
+            >Reset</a
           >
         </div>
       </form>
@@ -97,12 +140,21 @@
             class="text-decoration-none text-dark"
           >
             <div class="card h-100">
+              {% if vehicle.photo %}
+              <img
+                src="{{ vehicle.photo.url }}"
+                class="card-img-top"
+                style="height: 200px; object-fit: cover"
+                alt="{{ vehicle }}"
+              />
+              {% else %}
               <div
                 class="card-img-top bg-light d-flex align-items-center justify-content-center"
                 style="height: 200px"
               >
-                <span class="text-muted">Picture coming soon</span>
+                <span class="text-muted">No photo available</span>
               </div>
+              {% endif %}
               <div class="card-body">
                 <h5 class="card-title">
                   {{ vehicle.brand }} {{ vehicle.model }}
