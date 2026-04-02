@@ -122,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # On dit à Django d'utiliser notre classe User, qui hérite d'AbastractUser
 AUTH_USER_MODEL = "accounts.User"
