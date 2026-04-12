@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py migrate_data && gunicorn config.wsgi --bind 0.0.0.0:$PORT
+web: echo "=== STARTING ===" && python manage.py migrate && echo "=== RUNNING SEED ===" && python manage.py migrate_data && echo "=== STARTING SERVER ===" && gunicorn config.wsgi --bind 0.0.0.0:$PORT
