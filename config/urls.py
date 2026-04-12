@@ -26,6 +26,3 @@ urlpatterns = [
     path("", include("vehicles.urls")),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]
-
-# Permet de servir les fichiers uploadés en attendant d'avoir un vrai serveur
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
