@@ -15,8 +15,8 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
+  <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
         <a class="navbar-brand" href="{% url 'vehicles:vehicle_list' %}">
           <img
             src="{% static 'images/MM_Logo.png' %}"
@@ -24,18 +24,18 @@
             height="20"
           />
         </a>
-      </div>
-          <a
+        <div>
+          
             href="{% url 'vehicles:vehicle_list' %}"
             class="btn btn-outline-light btn-sm me-2"
             >Back to catalog</a
           >
-          <a
+          
             href="{% url 'accounts:profile' %}"
             class="text-light text-decoration-none me-3"
             >{{ user.first_name }}</a
           >
-          <a
+          
             href="{% url 'accounts:logout' %}"
             class="btn btn-outline-light btn-sm"
             >Logout</a
