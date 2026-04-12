@@ -149,6 +149,7 @@ MEDIA_URL = "/media/"
 
 # Dossier où seront stockés les fichiers
 MEDIA_ROOT = BASE_DIR / "media"
+WHITENOISE_ROOT = BASE_DIR / "staticfiles"
 
 # On the web, add XSS filtering - NoSniff - Anti-Clickjacking, protect Cookies, SSL Redirection
 if not DEBUG:
