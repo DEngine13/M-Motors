@@ -16,14 +16,15 @@
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark">
-      <div class="container">
+        <div class="container">
         <a class="navbar-brand" href="{% url 'vehicles:vehicle_list' %}">
           <img
             src="{% static 'images/MM_Logo.png' %}"
             alt="M-Motors"
             height="20"
           />
-        <div>
+        </a>
+      </div>
           <span class="text-light me-3">{{ user.first_name }}</span>
           <a
             href="{% url 'accounts:logout' %}"

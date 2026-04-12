@@ -16,14 +16,15 @@
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark">
-      <div class="container">
-       <a class="navbar-brand" href="{% url 'vehicles:vehicle_list' %}">
+        <div class="container">
+        <a class="navbar-brand" href="{% url 'vehicles:vehicle_list' %}">
           <img
             src="{% static 'images/MM_Logo.png' %}"
             alt="M-Motors"
             height="20"
           />
-        <div>
+        </a>
+      </div>
           <a
             href="{% url 'vehicles:vehicle_list' %}"
             class="btn btn-outline-light btn-sm me-2"
