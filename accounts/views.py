@@ -4,7 +4,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
 
-# Create your views here.
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -39,7 +38,7 @@ def profile(request):
         user.first_name = request.POST.get("first_name", "")
         user.last_name = request.POST.get("last_name", "")
         user.phone = request.POST.get("phone", "")
-        user.adress = request.POST.get("adress", "")
+        user.address = request.POST.get("address", "")
         user.save()
         return redirect("accounts:profile")
     return render(request, "accounts/profile.html")
