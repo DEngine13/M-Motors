@@ -1,9 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Vehicle, RentalOption
 
-# Create your views here.
-
-# On renvoie la liste de tous les véhicules
+# Gets the vehicle list
 def vehicle_list(request):
     vehicles = Vehicle.objects.filter(is_active=True)
 
@@ -49,12 +47,12 @@ def vehicle_list(request):
         "current_km_max": km_max,
     })
 
-# On récupère un véhicule par sa primary key (pk), sinon on renvoie une page 404
+# Retrieves a vehicle with its Primary Key (pk), otherwise displays 404 page
 def vehicle_detail(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk, is_active=True)
     return render(request, "vehicles/vehicle_details.html", {"vehicle": vehicle})
 
-# On récupère les options actives
+# Retrieves active options
 def rental_options_page(request):
     options = RentalOption.objects.filter(is_active=True)
     return render(request, "vehicles/rental_options.html", {"options": options})

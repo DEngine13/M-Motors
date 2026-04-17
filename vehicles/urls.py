@@ -3,7 +3,7 @@ from . import views
 
 app_name = "vehicles"
 
-# À la racine de l'application "/", on renvoie la liste de véhicules
+# App's root "/" sends vehicle list
 urlpatterns = [
     path("", views.vehicle_list, name="vehicle_list"),
     path("vehicule/<int:pk>", views.vehicle_detail, name="vehicle_detail"),

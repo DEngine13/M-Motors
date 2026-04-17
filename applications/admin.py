@@ -2,12 +2,10 @@ from django.contrib import admin
 from django.core.mail import send_mail
 from .models import Application, Document
 
-
 class DocumentInline(admin.TabularInline):
     model = Document
     extra = 0
     readonly_fields = ("document_type", "file", "uploaded_at")
-
 
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
