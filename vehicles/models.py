@@ -1,6 +1,6 @@
 from django.db import models
 
-# On créé le modèle de données pour les véhicules
+# Creates Model for vehicles
 class Vehicle(models.Model):
     SALE = "sale"
     RENTAL = "rental"

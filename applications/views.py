@@ -27,7 +27,7 @@ def apply_rental(request, vehicle_pk):
             application_type=Application.RENTAL,
             rental_duration=duration,
         )
-        # On sauvegarde les options sélectionnées
+        # Saves selected options
         option_ids = request.POST.getlist("rental_options")
         if option_ids:
             application.rental_options.set(option_ids)
