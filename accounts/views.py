@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
+
 
 def signup(request):
     if request.method == "POST":
@@ -13,12 +14,13 @@ def signup(request):
             return redirect("vehicles:vehicle_list")
     else:
         form = SignUpForm()
-        
+
     return render(request, "accounts/signup.html", {"form": form})
+
 
 def signin(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data = request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -27,9 +29,11 @@ def signin(request):
         form = AuthenticationForm()
     return render(request, "accounts/signin.html", {"form": form})
 
+
 def logout_view(request):
     logout(request)
     return redirect("vehicles:vehicle_list")
+
 
 @login_required
 def profile(request):
@@ -42,6 +46,7 @@ def profile(request):
         user.save()
         return redirect("accounts:profile")
     return render(request, "accounts/profile.html")
+
 
 @login_required
 def dashboard(request):

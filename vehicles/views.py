@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Vehicle, RentalOption
 
 # Gets the vehicle list
+
+
 def vehicle_list(request):
     vehicles = Vehicle.objects.filter(is_active=True)
 
@@ -48,11 +50,15 @@ def vehicle_list(request):
     })
 
 # Retrieves a vehicle with its Primary Key (pk), otherwise displays 404 page
+
+
 def vehicle_detail(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk, is_active=True)
     return render(request, "vehicles/vehicle_details.html", {"vehicle": vehicle})
 
 # Retrieves active options
+
+
 def rental_options_page(request):
     options = RentalOption.objects.filter(is_active=True)
     return render(request, "vehicles/rental_options.html", {"options": options})

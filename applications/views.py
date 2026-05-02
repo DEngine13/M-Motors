@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from vehicles.models import Vehicle
 from .models import Application, Document
 
+
 @login_required
 def apply_purchase(request, vehicle_pk):
     vehicle = get_object_or_404(Vehicle, pk=vehicle_pk, is_active=True)
@@ -14,6 +15,7 @@ def apply_purchase(request, vehicle_pk):
         )
         return redirect("applications:upload_documents", pk=application.pk)
     return render(request, "applications/apply_purchase.html", {"vehicle": vehicle})
+
 
 @login_required
 def apply_rental(request, vehicle_pk):
@@ -42,6 +44,7 @@ def apply_rental(request, vehicle_pk):
         "options": options,
     })
 
+
 @login_required
 def upload_documents(request, pk):
     application = get_object_or_404(Application, pk=pk, applicant=request.user)
@@ -62,7 +65,7 @@ def upload_documents(request, pk):
                 file=file,
             )
             return redirect("applications:upload_documents", pk=pk)
-    
+
     doc_status = []
     for code, label in Document.TYPE_CHOICES:
         doc_status.append({
@@ -77,6 +80,7 @@ def upload_documents(request, pk):
         "docs_uploaded": len(existing_docs),
         "docs_total": len(Document.TYPE_CHOICES),
     })
+
 
 @login_required
 def application_detail(request, pk):

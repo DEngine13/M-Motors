@@ -1,6 +1,8 @@
 from django.db import models
 
 # Creates Model for vehicles
+
+
 class Vehicle(models.Model):
     SALE = "sale"
     RENTAL = "rental"
@@ -24,15 +26,16 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
-    
+
     @property
     def is_for_sale(self):
         return self.vehicle_type in (self.SALE, self.BOTH)
-    
+
     @property
     def is_for_rental(self):
         return self.vehicle_type in (self.RENTAL, self.BOTH)
-    
+
+
 class RentalOption(models.Model):
     name = models.CharField("Name", max_length=100)
     description = models.TextField("Description")

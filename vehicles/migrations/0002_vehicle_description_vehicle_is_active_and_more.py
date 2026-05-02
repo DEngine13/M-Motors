@@ -23,12 +23,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='vehicle',
             name='monthly_rental',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=8, null=True, verbose_name='Monthly fee (€/month)'),
+            field=models.DecimalField(blank=True, decimal_places=2, max_digits=8,
+                                      null=True, verbose_name='Monthly fee (€/month)'),
         ),
         migrations.AddField(
             model_name='vehicle',
             name='vehicle_type',
-            field=models.CharField(choices=[('sale', 'For sale'), ('rental', 'To rent'), ('both', 'Buy or rent')], default='both', max_length=10, verbose_name='Offer type'),
+            field=models.CharField(choices=[('sale', 'For sale'), ('rental', 'To rent'),
+                                   ('both', 'Buy or rent')], default='both', max_length=10, verbose_name='Offer type'),
         ),
         migrations.AlterField(
             model_name='vehicle',

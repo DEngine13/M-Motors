@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from vehicles.models import Vehicle, RentalOption
 
+
 class Application(models.Model):
     PURCHASE = "purchase"
     RENTAL = "rental"
@@ -58,6 +59,7 @@ class Application(models.Model):
 
     def __str__(self):
         return f"File #{self.pk} — {self.get_application_type_display()} — {self.vehicle}"
+
 
 class Document(models.Model):
     ID_CARD = "id_card"

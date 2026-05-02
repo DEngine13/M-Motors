@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Vehicle, RentalOption
 
+
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
     list_display = ("brand", "model", "year", "mileage", "sale_price", "monthly_rental", "vehicle_type", "is_active")
@@ -28,6 +29,7 @@ class VehicleAdmin(admin.ModelAdmin):
     def activate(self, request, queryset):
         count = queryset.update(is_active=True)
         self.message_user(request, f"{count} vehicle(s) activated.")
+
 
 @admin.register(RentalOption)
 class RentalOptionAdmin(admin.ModelAdmin):

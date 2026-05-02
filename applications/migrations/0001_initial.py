@@ -19,12 +19,16 @@ class Migration(migrations.Migration):
             name='Application',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('application_type', models.CharField(choices=[('purchase', 'Buy a car'), ('rental', 'Rent a car')], max_length=10, verbose_name='Type')),
-                ('status', models.CharField(choices=[('pending', 'Awaiting processing'), ('reviewing', 'In review'), ('approved', 'Approved'), ('rejected', 'Rejected')], default='pending', max_length=20, verbose_name='Status')),
+                ('application_type', models.CharField(choices=[
+                 ('purchase', 'Buy a car'), ('rental', 'Rent a car')], max_length=10, verbose_name='Type')),
+                ('status', models.CharField(choices=[('pending', 'Awaiting processing'), ('reviewing', 'In review'), (
+                    'approved', 'Approved'), ('rejected', 'Rejected')], default='pending', max_length=20, verbose_name='Status')),
                 ('rejection_reason', models.TextField(blank=True, verbose_name='Reason for refusal')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Submission date')),
-                ('applicant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='applications', to=settings.AUTH_USER_MODEL)),
-                ('vehicle', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='applications', to='vehicles.vehicle')),
+                ('applicant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='applications', to=settings.AUTH_USER_MODEL)),
+                ('vehicle', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
+                 related_name='applications', to='vehicles.vehicle')),
             ],
         ),
     ]

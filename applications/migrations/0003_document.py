@@ -15,10 +15,12 @@ class Migration(migrations.Migration):
             name='Document',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('document_type', models.CharField(choices=[('id_card', 'Identification card'), ('proof_of_address', 'proof of address'), ('payslip_1', 'payslip (month 1)'), ('payslip_2', 'payslip (month 2)'), ('payslip_3', 'payslip (month 3)'), ('bank_details', 'RIB')], max_length=30, verbose_name='Type')),
+                ('document_type', models.CharField(choices=[('id_card', 'Identification card'), ('proof_of_address', 'proof of address'), ('payslip_1', 'payslip (month 1)'), (
+                    'payslip_2', 'payslip (month 2)'), ('payslip_3', 'payslip (month 3)'), ('bank_details', 'RIB')], max_length=30, verbose_name='Type')),
                 ('file', models.FileField(upload_to='files/', verbose_name='File')),
                 ('uploaded_at', models.DateTimeField(auto_now_add=True, verbose_name='Upload date')),
-                ('application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='files', to='applications.application')),
+                ('application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 related_name='files', to='applications.application')),
             ],
         ),
     ]

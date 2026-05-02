@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='application',
             name='rental_duration',
-            field=models.IntegerField(blank=True, choices=[(12, '12 months'), (24, '24 months'), (36, '36 months'), (48, '48 months')], null=True, verbose_name='Rental duration (months)'),
+            field=models.IntegerField(blank=True, choices=[(12, '12 months'), (24, '24 months'), (
+                36, '36 months'), (48, '48 months')], null=True, verbose_name='Rental duration (months)'),
         ),
     ]
