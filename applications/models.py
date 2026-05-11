@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from vehicles.models import Vehicle, RentalOption
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 
 
 class Application(models.Model):
@@ -61,6 +63,11 @@ class Application(models.Model):
         return f"File #{self.pk} — {self.get_application_type_display()} — {self.vehicle}"
 
 
+def validate_file_size(value):
+    max_size = 5 * 1024 * 1024  # 5 MB
+    if value.size > max_size:
+        raise ValidationError("File too large. Maximum size is 5 MB.")
+
 class Document(models.Model):
     ID_CARD = "id_card"
     PROOF_OF_ADDRESS = "proof_of_address"
@@ -84,7 +91,14 @@ class Document(models.Model):
     )
 
     document_type = models.CharField("Type", max_length=30, choices=TYPE_CHOICES)
-    file = models.FileField("File", upload_to="files/")
+    file = models.FileField(
+        "File",
+        upload_to="files/",
+        validators=[
+            FileExtensionValidator(allowed_extensions=["pdf", "jpg", "jpeg", "png"]),
+            validate_file_size,
+        ],
+    )
     uploaded_at = models.DateTimeField("Upload date", auto_now_add=True)
 
     def __str__(self):
