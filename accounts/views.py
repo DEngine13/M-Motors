@@ -3,6 +3,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def signup(request):
@@ -11,6 +14,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            logger.info("New signup: %s", user.email)
             return redirect("vehicles:vehicle_list")
     else:
         form = SignUpForm()
@@ -24,6 +28,7 @@ def signin(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            logger.info("Login: %s", user.email)
             return redirect("vehicles:vehicle_list")
     else:
         form = AuthenticationForm()

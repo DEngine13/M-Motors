@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from vehicles.models import Vehicle
 from .models import Application, Document
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @login_required
@@ -13,6 +16,7 @@ def apply_purchase(request, vehicle_pk):
             vehicle=vehicle,
             application_type=Application.PURCHASE,
         )
+        logger.info("New purchase application #%s by %s for %s", application.pk, request.user.email, vehicle)
         return redirect("applications:upload_documents", pk=application.pk)
     return render(request, "applications/apply_purchase.html", {"vehicle": vehicle})
 
@@ -29,6 +33,7 @@ def apply_rental(request, vehicle_pk):
             application_type=Application.RENTAL,
             rental_duration=duration,
         )
+        logger.info("New rental application #%s by %s for %s", application.pk, request.user.email, vehicle)
         # Saves selected options
         option_ids = request.POST.getlist("rental_options")
         if option_ids:

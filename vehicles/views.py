@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Vehicle, RentalOption
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Gets the vehicle list
 
@@ -40,6 +43,8 @@ def vehicle_list(request):
         .order_by("brand")
     )
 
+    logger.info("Catalog viewed: %d results (brand=%s, type=%s)", vehicles.count(), brand or "all", vehicle_type or "all")
+
     return render(request, "vehicles/vehicle_list.html", {
         "vehicles": vehicles,
         "all_brands": all_brands,
@@ -54,6 +59,7 @@ def vehicle_list(request):
 
 def vehicle_detail(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk, is_active=True)
+    logger.info("Vehicle detail viewed: %s (id=%s)", vehicle, vehicle.pk)
     return render(request, "vehicles/vehicle_details.html", {"vehicle": vehicle})
 
 # Retrieves active options
