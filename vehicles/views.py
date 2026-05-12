@@ -43,7 +43,10 @@ def vehicle_list(request):
         .order_by("brand")
     )
 
-    logger.info("Catalog viewed: %d results (brand=%s, type=%s)", vehicles.count(), brand or "all", vehicle_type or "all")
+    logger.info(
+        "Catalog viewed: %d results (brand=%s, type=%s)",
+        vehicles.count(), brand or "all", vehicle_type or "all",
+    )
 
     return render(request, "vehicles/vehicle_list.html", {
         "vehicles": vehicles,

@@ -68,6 +68,7 @@ def validate_file_size(value):
     if value.size > max_size:
         raise ValidationError("File too large. Maximum size is 5 MB.")
 
+
 class Document(models.Model):
     ID_CARD = "id_card"
     PROOF_OF_ADDRESS = "proof_of_address"
