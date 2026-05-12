@@ -107,7 +107,18 @@
                   <th>Rental duration</th>
                   <td>{{ application.rental_duration }} months</td>
                 </tr>
-                {% endif %}
+                {% if application.rental_options.exists %}
+                <tr>
+                  <th>Options</th>
+                  <td>
+                    {% for opt in application.rental_options.all %}
+                    <span class="badge bg-success me-1"
+                      >{{ opt.name }} (+{{ opt.monthly_price }} €)</span
+                    >
+                    {% endfor %}
+                  </td>
+                </tr>
+                {% endif %} {% endif %}
               </table>
             </div>
           </div>

@@ -29,6 +29,11 @@
 
     <div class="container my-4">
       <h1 class="mb-4">Documents — Application #{{ application.pk }}</h1>
+      <a
+        href="{% url 'accounts:dashboard' %}"
+        class="btn btn-outline-secondary mb-3"
+        >Back to dashboard</a
+      >
 
       <div class="row">
         <div class="col-md-6 mb-4">

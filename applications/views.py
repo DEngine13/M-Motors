@@ -24,31 +24,38 @@ def apply_purchase(request, vehicle_pk):
 @login_required
 def apply_rental(request, vehicle_pk):
     vehicle = get_object_or_404(Vehicle, pk=vehicle_pk, is_active=True)
+    from vehicles.models import RentalOption
+    options = RentalOption.objects.filter(is_active=True)
 
     if request.method == "POST":
         duration = request.POST.get("rental_duration")
+        if not duration:
+            return render(request, "applications/apply_rental.html", {
+                "vehicle": vehicle,
+                "duration_choices": Application.DURATION_CHOICES,
+                "options": options,
+                "error": "Please select a rental duration.",
+            })
         application = Application.objects.create(
             applicant=request.user,
             vehicle=vehicle,
             application_type=Application.RENTAL,
             rental_duration=duration,
         )
-        logger.info("New rental application #%s by %s for %s", application.pk, request.user.email, vehicle)
-        # Saves selected options
+        logger.info(
+            "New rental application #%s by %s for %s",
+            application.pk, request.user.email, vehicle,
+        )
         option_ids = request.POST.getlist("rental_options")
         if option_ids:
             application.rental_options.set(option_ids)
         return redirect("applications:upload_documents", pk=application.pk)
-
-    from vehicles.models import RentalOption
-    options = RentalOption.objects.filter(is_active=True)
 
     return render(request, "applications/apply_rental.html", {
         "vehicle": vehicle,
         "duration_choices": Application.DURATION_CHOICES,
         "options": options,
     })
-
 
 @login_required
 def upload_documents(request, pk):

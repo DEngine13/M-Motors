@@ -25,7 +25,7 @@
             height="20"
           />
         </a>
-        <div>
+        <div class="d-flex align-items-center">
           <a
             href="{% url 'vehicles:rental_options' %}"
             class="btn btn-outline-light btn-sm me-2"
@@ -39,12 +39,14 @@
           >
           <a
             href="{% url 'accounts:profile' %}"
-            class="text-light text-decoration-none me-3"
+            class="btn btn-sm text-decoration-none me-2"
+            style="color: #3affb0"
             >{{ user.first_name }}</a
           >
           <a
             href="{% url 'accounts:logout' %}"
-            class="btn btn-outline-light btn-sm"
+            class="btn btn-sm"
+            style="background-color: #ff3a6b; color: white"
             >Logout</a
           >
           {% else %}
