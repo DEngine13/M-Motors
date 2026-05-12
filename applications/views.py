@@ -57,6 +57,7 @@ def apply_rental(request, vehicle_pk):
         "options": options,
     })
 
+
 @login_required
 def upload_documents(request, pk):
     application = get_object_or_404(Application, pk=pk, applicant=request.user)
